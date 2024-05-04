@@ -10,7 +10,7 @@ namespace AgilePulseApi.Data
             
         }
 
-        public DbSet<ScrumUser> ScumUser { get; set; }
+        public DbSet<ScrumUser> ScrumUser { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Issue> Issue { get; set; }
         public DbSet<Cycle> Cycle { get; set; }
@@ -20,6 +20,9 @@ namespace AgilePulseApi.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // ScrumUser
+            modelBuilder.Entity<ScrumUser>().ToTable("ScrumUser");
 
             // Project
             modelBuilder.Entity<Project>().HasOne(x => x.scrumUser).WithMany(x => x.projects).HasForeignKey(x => x.LeadId);
