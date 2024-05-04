@@ -5,7 +5,11 @@ using AutoMapper;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography.Xml;
+using System.Text;
 
 namespace AgilePulseApi.Controllers
 {
@@ -15,12 +19,13 @@ namespace AgilePulseApi.Controllers
     {
         private readonly IMapper mapper;
         private readonly ScrumDbContext scrumDbContext;
-        
+        private readonly IConfiguration configuration;
 
-        public ScrumUserController(IMapper mapper, ScrumDbContext scrumDbContext)
+        public ScrumUserController(IMapper mapper, ScrumDbContext scrumDbContext, IConfiguration configuration)
         {
             this.mapper = mapper;
             this.scrumDbContext = scrumDbContext;
+            this.configuration = configuration;
         }
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
@@ -66,7 +71,23 @@ namespace AgilePulseApi.Controllers
                 var verifyPassword = BCrypt.Net.BCrypt.Verify(loginScrumUserDTO.Password, checkUser.Password);
                 if (verifyPassword)
                 {
-                    return Ok("Login Successfully");
+                    // Generate Token
+                    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+                    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+                    var claims = new[]
+                    {
+                        new Claim(ClaimTypes.Name, checkUser.ScrumUsername),
+                        new Claim(ClaimTypes.Email, checkUser.Email)
+                    };
+
+                    var token = new JwtSecurityToken(
+                        configuration["Jwt:Issuer"],
+                        configuration["Jwt:Audience"],
+                        claims,
+                        expires: DateTime.Now.AddMinutes(60),
+                        signingCredentials: credentials
+                        );
+                    return Ok(new JwtSecurityTokenHandler().WriteToken(token));
                 }
                 return BadRequest("Invalid Credentials");
 
