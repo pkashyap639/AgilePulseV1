@@ -135,3 +135,4 @@ C:\Project\AgilePulseV1\AgilePulseV1\AgilePulseApi\AgilePulseApi\obj\Debug\net8.
 C:\Project\AgilePulseV1\AgilePulseV1\AgilePulseApi\AgilePulseApi\obj\Debug\net8.0\AgilePulseApi.pdb
 C:\Project\AgilePulseV1\AgilePulseV1\AgilePulseApi\AgilePulseApi\obj\Debug\net8.0\AgilePulseApi.genruntimeconfig.cache
 C:\Project\AgilePulseV1\AgilePulseV1\AgilePulseApi\AgilePulseApi\obj\Debug\net8.0\ref\AgilePulseApi.dll
+C:\Project\AgilePulseV1\AgilePulseV1\AgilePulseApi\AgilePulseApi\bin\Debug\net8.0\AutoMapper.dll

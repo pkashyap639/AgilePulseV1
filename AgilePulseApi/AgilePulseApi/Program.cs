@@ -1,3 +1,4 @@
+using AgilePulseApi.AutoMapper;
 using AgilePulseApi.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<ScrumDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ScrumProjectDb"));
 });
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

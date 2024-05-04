@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "mgWxrEIbgBhzFKwvJx7ZYnHEnZ5H1Ayewl0nl1VMOsw7vK/LCtm2J3bfDpGDYg5tm6saLO4AGjDDrgtAM79Z3g==",
+  "dgSpecHash": "HfRRWsaghfY9QBrM/nfSYFzUFMm0ujkx8CFAxZGthJjJB/qLgBYEqnT9mEfYKz4J9kuvYGRrl4Ff8VjAMGhQag==",
   "success": true,
   "projectFilePath": "C:\\Project\\AgilePulseV1\\AgilePulseV1\\AgilePulseApi\\AgilePulseApi\\AgilePulseApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\c0893688\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\c0893688\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\c0893688\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\c0893688\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
