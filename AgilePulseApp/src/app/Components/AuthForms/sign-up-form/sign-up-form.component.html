@@ -1,1 +1,74 @@
-<p>sign-up-form works!</p>
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <p class="text-3xl text-gray-900 font-semibold text-center dark:text-white">AGILEPULSE</p>
+
+      <!-- <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company"> -->
+      <h2 class="mt-10 text-center text-2xl font-semibold leading-9 tracking-tight text-gray-900">Create an account</h2>
+    </div>
+  
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <form class="space-y-6" [formGroup]="signUpForm" (ngSubmit)="SubmitSignUpDetails()">
+        <div>
+            <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+            <div class="mt-2">
+              <input formControlName="username" id="username" name="username" type="text" autocomplete="username" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6">
+            </div>
+            <!-- Space for Errors -->
+            @if ( username?.dirty && username?.hasError('required')) {
+                <p class=" text-sm font-semibold text-red-600">Username Required</p>
+            }
+            @if (username?.dirty && username?.hasError('minlength')) {
+                <p class=" text-sm font-semibold text-red-600">Required atleast 3 characters</p>
+            }
+            @if (username?.dirty && username?.hasError('maxlength')) {
+                <p class=" text-sm font-semibold text-red-600">Character Limit Exceeded</p>
+            }
+          </div>
+        <div>
+          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+          <div class="mt-2">
+            <input formControlName="email" id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6">
+          </div>
+          <!-- Space for Errors -->
+          @if ( email?.dirty && email?.hasError('required')) {
+            <p class=" text-sm font-semibold text-red-600">Email Required</p>
+        }
+        @if (email?.dirty && email?.hasError('pattern')) {
+            <p class=" text-sm font-semibold text-red-600">Invalid Email</p>
+        }
+        </div>
+  
+        <div>
+          <div class="flex items-center justify-between">
+            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+          </div>
+          
+          <div class="mt-2">
+            <input formControlName="password" id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6">
+          </div>
+          <!-- Space for Errors -->
+          @if ( password?.dirty && password?.hasError('required')) {
+            <p class=" text-sm font-semibold text-red-600">Password Required</p>
+        }
+        @if (password?.dirty && password?.hasError('minlength')) {
+            <p class=" text-sm font-semibold text-red-600">Required atleast 8 characters</p>
+        }
+        @if (password?.dirty && password?.hasError('maxlength')) {
+            <p class=" text-sm font-semibold text-red-600">Character Limit Exceeded</p>
+        }
+        </div>
+  
+        <div>
+          <button [disabled]="checkFormValidity()" type="submit" class="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Sign Up</button>
+        </div>
+      </form>
+  
+      <p class="mt-10 text-center text-sm text-gray-500">
+        Already a member?
+        <a routerLink="/signin" class="font-semibold leading-6 text-gray-900 hover:text-gray-900">Sign In Here !</a>
+      </p>
+    </div>
+  </div>
+
+  {{signUpForm.value |json}}
+  {{signUpForm.status |json}}

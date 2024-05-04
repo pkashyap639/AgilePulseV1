@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignInFormComponent } from './Components/AuthForms/sign-in-form/sign-in-form.component';
 import { SignUpFormComponent } from './Components/AuthForms/sign-up-form/sign-up-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +16,8 @@ import { SignUpFormComponent } from './Components/AuthForms/sign-up-form/sign-up
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
