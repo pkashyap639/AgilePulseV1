@@ -1,0 +1,6 @@
+@AgilePulseApi_HostAddress = http://localhost:5041
+
+GET {{AgilePulseApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
