@@ -5,6 +5,7 @@ using AutoMapper;
 using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.Xml;
 
 namespace AgilePulseApi.Controllers
 {
@@ -29,7 +30,7 @@ namespace AgilePulseApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateScrumUser(AddScrumUser addScrumUser)
+        public async Task<IActionResult> CreateScrumUser([FromBody]AddScrumUser addScrumUser)
         {
             // convert dto to domain
             var scrumUserDomain = new ScrumUser
@@ -49,6 +50,32 @@ namespace AgilePulseApi.Controllers
             }catch(Exception ex) {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> LoginScrumUser([FromBody] LoginScrumUserDTO loginScrumUserDTO)
+        {
+
+            // check if user does not exists
+            try
+            {
+                var checkUser = await scrumDbContext.ScrumUser.FirstOrDefaultAsync(x => x.Email == loginScrumUserDTO.Email);
+                if (checkUser == null) { return BadRequest("Invalid Credentials"); }
+                // check password hashing
+                var verifyPassword = BCrypt.Net.BCrypt.Verify(loginScrumUserDTO.Password, checkUser.Password);
+                if (verifyPassword)
+                {
+                    return Ok("Login Successfully");
+                }
+                return BadRequest("Invalid Credentials");
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
     }
 }
