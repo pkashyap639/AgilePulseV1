@@ -11,6 +11,9 @@ import { UserService } from '../../../Services/user.service';
 export class SignUpFormComponent implements OnInit{
 
   public signUpForm!:FormGroup;
+  public showLoadingSpinner:boolean = false;
+  public showSuccessToast:boolean = false;
+  public showErrorToast:boolean = false;
   constructor(private fb:FormBuilder, private userService:UserService){
     this.createSignUpForm();
   }
@@ -28,6 +31,7 @@ export class SignUpFormComponent implements OnInit{
   }
 
   SubmitSignUpDetails(){
+    this.showLoadingSpinner = true;
     if(this.signUpForm.valid){
       let scrumUser:CreateScrumuser = {
         ScrumUsername : this.signUpForm.value.username,
@@ -40,9 +44,20 @@ export class SignUpFormComponent implements OnInit{
       },
       error:(err)=>{
         console.error(err)
+        this.showLoadingSpinner = false;
+        this.showErrorToast = true;
+        setTimeout(() => {
+          this.showErrorToast = false;
+        }, 3000);
+      
       },
       complete:()=>{
         console.log("Completed");
+        this.showLoadingSpinner = false;
+        this.showSuccessToast = true;
+        setTimeout(() => {
+          this.showSuccessToast = false;
+        }, 3000);
       }
      }); 
     }
