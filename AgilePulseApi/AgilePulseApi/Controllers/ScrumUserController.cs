@@ -3,6 +3,7 @@ using AgilePulseApi.Models.Domain;
 using AgilePulseApi.Models.DTO;
 using AutoMapper;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +36,7 @@ namespace AgilePulseApi.Controllers
         }
 
         [HttpPost]
+        [EnableCors]
         public async Task<IActionResult> CreateScrumUser([FromBody]AddScrumUser addScrumUser)
         {
             // convert dto to domain
@@ -58,6 +60,7 @@ namespace AgilePulseApi.Controllers
         }
 
         [HttpPost]
+        [EnableCors]
         [Route("login")]
         public async Task<IActionResult> LoginScrumUser([FromBody] LoginScrumUserDTO loginScrumUserDTO)
         {

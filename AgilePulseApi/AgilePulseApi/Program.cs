@@ -1,6 +1,7 @@
 using AgilePulseApi.AutoMapper;
 using AgilePulseApi.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -33,7 +34,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 var app = builder.Build();
-
+app.UseCors(options =>
+{
+    options.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+});
+app.UseCors("MyPolicy");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

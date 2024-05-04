@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SignInFormComponent } from './Components/AuthForms/sign-in-form/sign-in-form.component';
 import { SignUpFormComponent } from './Components/AuthForms/sign-up-form/sign-up-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

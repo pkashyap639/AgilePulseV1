@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, EmailValidator } from '@angular/forms';
+import { CreateScrumuser } from '../../../Models/CreateScrumUser';
+import { UserService } from '../../../Services/user.service';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -9,7 +11,7 @@ import { FormControl, FormGroup, FormBuilder, Validators, EmailValidator } from 
 export class SignUpFormComponent implements OnInit{
 
   public signUpForm!:FormGroup;
-  constructor(private fb:FormBuilder){
+  constructor(private fb:FormBuilder, private userService:UserService){
     this.createSignUpForm();
   }
 
@@ -27,7 +29,22 @@ export class SignUpFormComponent implements OnInit{
 
   SubmitSignUpDetails(){
     if(this.signUpForm.valid){
-      console.log(this.signUpForm.value)
+      let scrumUser:CreateScrumuser = {
+        ScrumUsername : this.signUpForm.value.username,
+        Email : this.signUpForm.value.email,
+        Password: this.signUpForm.value.password
+      }
+     this.userService.createScrumUser(scrumUser).subscribe({
+      next:(data)=>{
+        console.log(data);
+      },
+      error:(err)=>{
+        console.error(err)
+      },
+      complete:()=>{
+        console.log("Completed");
+      }
+     }); 
     }
     else{
       console.log("Invalid Form")

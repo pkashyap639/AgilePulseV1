@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, EmailValidator } from '@angular/forms';
+import { CreateScrumuser } from '../../../Models/CreateScrumUser';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -25,7 +26,10 @@ export class SignInFormComponent implements OnInit{
 
   SubmitSignInDetails(){
     if(this.signInForm.valid){
-      console.log(this.signInForm.value)
+      // /console.log(this.signInForm)
+      // let scrumUser:CreateScrumuser = {
+      //   ScrumUsername = this.signInForm.value
+      // }
     }
     else{
       console.log("Invalid Form")
