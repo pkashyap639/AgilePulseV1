@@ -90,7 +90,8 @@ namespace AgilePulseApi.Controllers
                         expires: DateTime.Now.AddMinutes(60),
                         signingCredentials: credentials
                         );
-                    return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                    var loginToken = new JwtSecurityTokenHandler().WriteToken(token);
+                    return Ok(new { token= loginToken });
                 }
                 return BadRequest("Invalid Credentials");
 

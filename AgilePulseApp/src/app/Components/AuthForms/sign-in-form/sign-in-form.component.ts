@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, EmailValidator } from '@angular/forms';
 import { CreateScrumuser } from '../../../Models/CreateScrumUser';
+import { UserService } from '../../../Services/user.service';
+import { loginScrumUser } from '../../../Models/LoginScrumUser';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -9,8 +11,11 @@ import { CreateScrumuser } from '../../../Models/CreateScrumUser';
 })
 export class SignInFormComponent implements OnInit{
   public signInForm!:FormGroup;
+  public showLoadingSpinner:boolean = false;
+  public showSuccessToast:boolean = false;
+  public showErrorToast:boolean = false;
 
-  constructor(private fb:FormBuilder){
+  constructor(private fb:FormBuilder, private userService:UserService){
     this.createSignInForm();
   }
   ngOnInit(): void {
@@ -25,11 +30,34 @@ export class SignInFormComponent implements OnInit{
   }
 
   SubmitSignInDetails(){
+    this.showLoadingSpinner = true
     if(this.signInForm.valid){
-      // /console.log(this.signInForm)
-      // let scrumUser:CreateScrumuser = {
-      //   ScrumUsername = this.signInForm.value
-      // }
+      let scrumUser:loginScrumUser = {
+        Email : this.signInForm.value.email,
+        Password: this.signInForm.value.password
+      }
+      this.userService.loginScrumUser(scrumUser).subscribe({
+        next:(res)=>{
+          console.log(res);
+          
+        },
+        error:(err)=>{
+          console.error(err);
+          this.showLoadingSpinner = false;
+          this.showErrorToast = true;
+          setTimeout(() => {
+            this.showErrorToast = false;
+          }, 3000);
+        },
+        complete:()=>{
+          console.log("Completed");
+          this.showLoadingSpinner = false;
+          this.showSuccessToast = true;
+          setTimeout(() => {
+            this.showSuccessToast = false;
+          }, 3000);
+        }
+      });
     }
     else{
       console.log("Invalid Form")
