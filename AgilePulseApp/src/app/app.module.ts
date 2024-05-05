@@ -8,6 +8,9 @@ import { SignUpFormComponent } from './Components/AuthForms/sign-up-form/sign-up
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './Components/Dashboard/dashboard/dashboard.component';
+import { ProjectComponent } from './Components/Dashboard/project/project.component';
+import { IssueComponent } from './Components/Dashboard/issue/issue.component';
+import { CycleComponent } from './Components/Dashboard/cycle/cycle.component';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { DashboardComponent } from './Components/Dashboard/dashboard/dashboard.c
     AppComponent,
     SignInFormComponent,
     SignUpFormComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProjectComponent,
+    IssueComponent,
+    CycleComponent
   ],
   imports: [
     BrowserModule,
