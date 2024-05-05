@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators, EmailValidator } from 
 import { CreateScrumuser } from '../../../Models/CreateScrumUser';
 import { UserService } from '../../../Services/user.service';
 import { loginScrumUser } from '../../../Models/LoginScrumUser';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -15,7 +16,7 @@ export class SignInFormComponent implements OnInit{
   public showSuccessToast:boolean = false;
   public showErrorToast:boolean = false;
 
-  constructor(private fb:FormBuilder, private userService:UserService){
+  constructor(private fb:FormBuilder, private userService:UserService, private route:Router){
     this.createSignInForm();
   }
   ngOnInit(): void {
@@ -56,6 +57,7 @@ export class SignInFormComponent implements OnInit{
           setTimeout(() => {
             this.showSuccessToast = false;
           }, 3000);
+          this.route.navigate(['dashboard'])
         }
       });
     }

@@ -7,13 +7,15 @@ import { SignInFormComponent } from './Components/AuthForms/sign-in-form/sign-in
 import { SignUpFormComponent } from './Components/AuthForms/sign-up-form/sign-up-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './Components/Dashboard/dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInFormComponent,
-    SignUpFormComponent
+    SignUpFormComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
