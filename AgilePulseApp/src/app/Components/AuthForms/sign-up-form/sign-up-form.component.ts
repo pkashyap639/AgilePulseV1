@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, EmailValidator } from '@angular/forms';
 import { CreateScrumuser } from '../../../Models/CreateScrumUser';
 import { UserService } from '../../../Services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -14,12 +15,13 @@ export class SignUpFormComponent implements OnInit{
   public showLoadingSpinner:boolean = false;
   public showSuccessToast:boolean = false;
   public showErrorToast:boolean = false;
-  constructor(private fb:FormBuilder, private userService:UserService){
+  constructor(private fb:FormBuilder, private userService:UserService, private route:Router){
     this.createSignUpForm();
   }
 
   ngOnInit(): void {
-    
+    if(this.userService.checkIfAuth()) this.route.navigate(['dashboard'])
+
   }
 
   createSignUpForm(){

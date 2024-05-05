@@ -20,7 +20,7 @@ export class SignInFormComponent implements OnInit{
     this.createSignInForm();
   }
   ngOnInit(): void {
-    
+    if(this.userService.checkIfAuth()) this.route.navigate(['dashboard'])
   }
 
   createSignInForm(){
@@ -40,7 +40,7 @@ export class SignInFormComponent implements OnInit{
       this.userService.loginScrumUser(scrumUser).subscribe({
         next:(res)=>{
           console.log(res);
-          
+          this.userService.setTokenToSession(res.token)
         },
         error:(err)=>{
           console.error(err);

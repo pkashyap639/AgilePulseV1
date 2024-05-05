@@ -20,4 +20,17 @@ export class UserService {
   loginScrumUser(scrumUser:loginScrumUser):Observable<any>{
     return this.http.post<any>(`${this.apiUrl}login/`,scrumUser);
   }
+
+  // set session storage
+  setTokenToSession(token:string){
+    sessionStorage.setItem("Token",token)
+  }
+
+  // check if authenticated
+  checkIfAuth(){
+    if(sessionStorage.getItem('Token')){
+      return true
+    }
+    return false
+  }
 }
