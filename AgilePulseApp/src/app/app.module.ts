@@ -13,6 +13,7 @@ import { IssueComponent } from './Components/Dashboard/issue/issue.component';
 import { CycleComponent } from './Components/Dashboard/cycle/cycle.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtModule } from "@auth0/angular-jwt";
+import { ProjectModalComponent } from './Components/Dashboard/project-modal/project-modal.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem("Token");
@@ -26,7 +27,8 @@ export function tokenGetter() {
     DashboardComponent,
     ProjectComponent,
     IssueComponent,
-    CycleComponent
+    CycleComponent,
+    ProjectModalComponent
   ],
   imports: [
     BrowserModule,
