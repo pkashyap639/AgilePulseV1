@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AgilePulseApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+16d599c3c556384ad913974e6a39a84f503b48bd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f238026fde7556b4c071bcdc9fa18e8e393032ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("AgilePulseApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AgilePulseApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
