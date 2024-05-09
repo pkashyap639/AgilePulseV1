@@ -79,8 +79,8 @@ namespace AgilePulseApi.Controllers
                     var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
                     var claims = new[]
                     {
-                        new Claim(ClaimTypes.Name, checkUser.ScrumUsername),
-                        new Claim(ClaimTypes.Email, checkUser.Email)
+                        new Claim("Name", checkUser.ScrumUsername),
+                        new Claim("Email", checkUser.Email)
                     };
 
                     var token = new JwtSecurityToken(

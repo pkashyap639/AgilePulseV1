@@ -11,7 +11,12 @@ import { DashboardComponent } from './Components/Dashboard/dashboard/dashboard.c
 import { ProjectComponent } from './Components/Dashboard/project/project.component';
 import { IssueComponent } from './Components/Dashboard/issue/issue.component';
 import { CycleComponent } from './Components/Dashboard/cycle/cycle.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtModule } from "@auth0/angular-jwt";
 
+export function tokenGetter() {
+  return sessionStorage.getItem("Token");
+}
 
 @NgModule({
   declarations: [
@@ -27,7 +32,14 @@ import { CycleComponent } from './Components/Dashboard/cycle/cycle.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["https://localhost:7208/"],
+        disallowedRoutes: [],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
