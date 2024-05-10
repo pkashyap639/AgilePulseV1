@@ -12,6 +12,7 @@ namespace AgilePulseApi.Models.Domain
         // Foreign Key
         public Guid LeadId { get; set; }
         public ScrumUser scrumUser { get; set; }
+
         public List<Project> projects { get; set; }
         public List<Issue> issues { get; set; }
 
