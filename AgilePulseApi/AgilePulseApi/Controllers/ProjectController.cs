@@ -23,6 +23,14 @@ namespace AgilePulseApi.Controllers
             this.scrumDbContext = scrumDbContext;
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> getAllProjects(Guid id)
+        {
+            // get projects if from scrumproject table
+            var projectIds = await scrumDbContext.ScrumUserProject.Where(x => x.ScrumUserId == id).Include(x=>x.Project).ToListAsync();
+            return Ok(mapper.Map<List<OnlyProjectDTO>>(projectIds));
+        }
         [HttpPost]
         [EnableCors]
         public async Task<IActionResult> AddProject(AddProjectDto addProjectDto)
