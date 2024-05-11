@@ -14,6 +14,7 @@ export class ProjectModalComponent implements OnInit{
 
   addProjectForm!:FormGroup;
   @Output() public addProjectData = new EventEmitter();
+  @Output() public sendProjectdataToParentFromModal:any = new EventEmitter();
   showModal = true;
   constructor(private fb:FormBuilder, private userService:UserService, private projectService:ProjectService, private route:Router) {
     this.createAddProjectForm();
@@ -51,12 +52,20 @@ export class ProjectModalComponent implements OnInit{
         },
         complete:()=>{
           this.showModal = false
+          this.getAllProject();
         }
       });
       
     }
   }
 
+  getAllProject(){
+    this.projectService.getProject(this.userService.getIdFromToken()).subscribe({
+      next:(res)=>{
+        this.sendProjectdataToParentFromModal.emit(res);
+      }
+    })
+  }
   // getter and setter
   get projectName(){
     return this.addProjectForm.get('projectName')

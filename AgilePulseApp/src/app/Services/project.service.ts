@@ -19,4 +19,8 @@ export class ProjectService {
   getProject(id:string):Observable<any>{
     return this.http.get(`${this.apiUrl}/${id}`);
   }
+
+  deleteProject(LeadId:string, ProjectId:string){
+    return this.http.delete(`${this.apiUrl}/${LeadId}/${ProjectId}`);
+  }
 }
