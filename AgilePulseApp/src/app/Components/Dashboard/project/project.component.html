@@ -1,2 +1,2 @@
-<app-project-modal></app-project-modal>
-<app-project-card [myProjectsData]="projectsData" ></app-project-card>
+<app-project-modal (sendProjectdataToParentFromModal)="projectsData=$event"></app-project-modal>
+<app-project-card [myProjectsData]="projectsData" (sendProjectdataToParent)="projectsData=$event"></app-project-card>
