@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../../../Services/user.service';
+import { AddProject } from '../../../Models/AddProject';
+import { ProjectService } from '../../../Services/project.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-modal',
@@ -9,7 +13,9 @@ import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProjectModalComponent implements OnInit{
 
   addProjectForm!:FormGroup;
-  constructor(private fb:FormBuilder) {
+  @Output() public addProjectData = new EventEmitter();
+  showModal = true;
+  constructor(private fb:FormBuilder, private userService:UserService, private projectService:ProjectService, private route:Router) {
     this.createAddProjectForm();
     
   }
@@ -26,7 +32,27 @@ export class ProjectModalComponent implements OnInit{
 
   addProject(){
     if(this.addProjectForm.valid){
-      console.log(this.addProjectForm.value);
+      const LeadId = this.userService.getIdFromToken()
+      let addProject:AddProject = {
+        Title: this.addProjectForm.value.projectName,
+        Description: this.addProjectForm.value.projectDescription,
+        LeadId: LeadId
+      }
+      this.addProjectData.emit(addProject);
+      console.log(addProject);
+      this.projectService.addProject(addProject).subscribe({
+        next:(res)=>{
+          console.log(res);
+          this.route.navigate(['dashboard'])
+        },
+        error:(err)=>{
+          console.log(err);
+          
+        },
+        complete:()=>{
+          this.showModal = false
+        }
+      });
       
     }
   }

@@ -24,12 +24,13 @@ namespace AgilePulseApi.Controllers
         }
 
         [HttpPost]
+        [EnableCors]
         public async Task<IActionResult> AddProject(AddProjectDto addProjectDto)
         {
             // convert dto to domain
             var addProjectDomain = mapper.Map<Project>(addProjectDto);
             // check if user exists using guid
-            var userExists = await scrumDbContext.Projects.FirstOrDefaultAsync(x=>x.LeadId == addProjectDomain.LeadId);
+            var userExists = await scrumDbContext.ScrumUser.FirstOrDefaultAsync(x=>x.ScrumUserId == addProjectDomain.LeadId);
             if (userExists == null) {
                 return BadRequest();
             }
@@ -40,12 +41,14 @@ namespace AgilePulseApi.Controllers
                 LeadId = addProjectDomain.LeadId
             };
             var addProject = await scrumDbContext.Projects.AddAsync(newProjectDomain);
+            await scrumDbContext.SaveChangesAsync();
             var projectScrumId = new ScrumUserProject {
-                ScrumUserId = userExists.LeadId,
+                ScrumUserId = userExists.ScrumUserId,
                 ProjectId = addProject.Entity.ProjectId
             };
             var addProjectScrum = await scrumDbContext.ScrumUserProject.AddAsync(projectScrumId);
-            return Ok("Project Added Successfully");
+            await scrumDbContext.SaveChangesAsync();
+            return Ok(new { msg = "Project Added Successfully" });
         }
     }
 }
