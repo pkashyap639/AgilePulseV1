@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AddProject } from '../../../Models/AddProject';
 
 @Component({
   selector: 'app-project',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './project.component.css'
 })
 export class ProjectComponent {
+
 
 }

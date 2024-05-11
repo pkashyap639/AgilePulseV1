@@ -58,4 +58,9 @@ export class UserService {
     if(this.userPayload) return this.userPayload.Name;
   }
 
+  getIdFromToken(){
+    if(this.userPayload) return this.userPayload.ScrumUserId;
+
+  }
+
 }
