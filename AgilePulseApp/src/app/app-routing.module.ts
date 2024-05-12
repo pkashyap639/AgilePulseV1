@@ -15,11 +15,11 @@ const routes: Routes = [
   {path: '', component:SignUpFormComponent},
   {path: 'signin', component: SignInFormComponent},
   {path: 'signup', component: SignUpFormComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate:[authGuard], canDeactivate:[noAuthGuard],
+  {path: 'dashboard', component: DashboardComponent, canActivate:[authGuard],
     children:[
       {path:'', redirectTo:'project', pathMatch:'full'},
       {path:'project', component: ProjectComponent,canActivate:[authGuard]},
-      {path:'issue', component: IssueComponent,canActivate:[authGuard]},
+      {path:'issue/:projectId', component: IssueComponent,canActivate:[authGuard]},
       {path:'cycle', component: CycleComponent,canActivate:[authGuard]}
     ]
   },
