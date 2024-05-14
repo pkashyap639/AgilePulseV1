@@ -21,7 +21,7 @@ namespace AgilePulseApi.Models.Domain
         public ScrumUser scrumUser { get; set; }
         public Guid projectId { get; set; }
         public Project project { get; set; }
-        public Guid cycleId { get; set; }
+        public Guid? cycleId { get; set; }
         public Cycle cycle { get; set; }
     }
 }
