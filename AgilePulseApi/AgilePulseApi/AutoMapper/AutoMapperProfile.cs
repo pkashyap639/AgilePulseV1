@@ -12,6 +12,7 @@ namespace AgilePulseApi.AutoMapper
             CreateMap<Project, AddProjectDto>().ReverseMap();
             CreateMap<Project, GetProjectsDto>().ReverseMap();
             CreateMap<ScrumUserProject, OnlyProjectDTO>().ReverseMap();
+            CreateMap<Issue, AddIssueDTO>().ReverseMap();
         }  
     }
 }
