@@ -24,7 +24,7 @@ export class IssueModalComponent implements OnInit{
       IssueDescription: ['',[Validators.maxLength(100)]],
       Status: ['ToDo',[Validators.required]],
       Priority: ['Low',[Validators.required]],
-      StartDate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), [Validators.required]],
+      StartDate: [''],
       EndDate: [''],
       Assignee: ['']
     })
@@ -58,4 +58,28 @@ export class IssueModalComponent implements OnInit{
       })
     }
   }
+
+  // getter of issue form
+  get IssueTitle(){
+    return this.IssueForm.get('IssueTitle')
+  }
+  get IssueDescription(){
+    return this.IssueForm.get('IssueDescription')
+  }
+  get Status(){
+    return this.IssueForm.get('Status')
+  }
+  get Priority(){
+    return this.IssueForm.get('Priority')
+  }
+  get StartDate(){
+    return this.IssueForm.get('StartDate')
+  }
+  get EndDate(){
+    return this.IssueForm.get('EndDate')
+  }
+  get Assignee(){
+    return this.IssueForm.get('Assignee')
+  }
+
 }
