@@ -21,6 +21,23 @@ namespace AgilePulseApi.Controllers
             this.scrumDbContext = scrumDbContext;
         }
 
+        [HttpGet]
+        [EnableCors]
+        [Route("{scrumUserId}/{projectId}")]
+        public async Task<IActionResult> GetIssue(Guid scrumUserId, Guid projectId)
+        {
+            // check user and project
+            var projectUser = await scrumDbContext.ScrumUserProject.Where(x => x.ScrumUserId == scrumUserId && x.ProjectId == projectId).FirstOrDefaultAsync();
+            if(projectUser == null)
+            {
+                return BadRequest(new { msg = "User or Project does not exists" });
+            }
+
+            var issues = await scrumDbContext.Issue.Include(x => x.scrumUser).Include(x => x.project).ToListAsync();
+            var issueList = mapper.Map<List<GetIssueDTO>>(issues);
+            return Ok(issueList);
+        }
+
         [HttpPost]
         [EnableCors]
         public async Task<IActionResult> AddIssue(AddIssueDTO issueDTO)

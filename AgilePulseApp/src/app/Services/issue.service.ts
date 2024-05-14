@@ -15,4 +15,8 @@ export class IssueService {
   createIssue(issue:AddIssue):Observable<any>{
     return this.http.post(this.apiUrl,issue);
   }
+
+  getIssues(scrumUserId:string, projectId:string){
+    return this.http.get(`${this.apiUrl}/${scrumUserId}/${projectId}`);
+  }
 }
