@@ -50,7 +50,7 @@ namespace AgilePulseApi.Controllers
                 return BadRequest(new { error = ex.Message });
             }
             
-            return Ok(createIssue) ;
+            return Ok(new { msg = "Issue Created Successfully" }) ;
         }
     }
 }
